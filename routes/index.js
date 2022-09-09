@@ -1,0 +1,10 @@
+import express from "express";
+import Home from "../controllers/homeController.js";
+const router = express.Router();
+router.get("/", Home.home);
+router.get("/signup", Home.signUpPage);
+router.get("/login", Home.signInPage);
+router.post("/signup", Home.createUser);
+router.post("/login", Home.loginUser);
+router.get("/logout", Home.logoutUser);
+export default router;
