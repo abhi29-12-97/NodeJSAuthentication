@@ -1,7 +1,9 @@
 import express from "express";
 import Home from "../controllers/homeController.js";
+import Auth from "../config/auth.js";
 const router = express.Router();
-router.get("/", Home.home);
+router.get("/");
+router.get("/home", Auth.checkAuthenticated, Home.home);
 router.get("/signup", Home.signUpPage);
 router.get("/login", Home.signInPage);
 router.post("/signup", Home.createUser);

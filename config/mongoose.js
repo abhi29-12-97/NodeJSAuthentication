@@ -1,6 +1,6 @@
 // setting up mongoose schema for the database
 import mongoose from "mongoose";
-var uri = process.env.MONGOLAB_URI || `mongodb://localhost/issue_tracker`;
+var uri = process.env.MONGOLAB_URI || `mongodb://localhost/Authentication`;
 mongoose.connect(uri);
 
 const db = mongoose.connection;
