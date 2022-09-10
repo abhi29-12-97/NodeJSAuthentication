@@ -10,7 +10,7 @@ export default class Home {
   static dashBoard = (req, res) => {
     res.render("dashboard", {
       title: "dashboard",
-      name: req.user.name,
+      user: req.user,
     });
   };
 
@@ -66,7 +66,41 @@ export default class Home {
       successFlash: true,
     })(req, res, next);
   };
-
+  static resetPage = async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.render("reset", {
+      title: "reset",
+      user: user,
+    });
+  };
+  static update = async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (user.email !== req.body.email) {
+        req.flash("error", "Email Doesn't match");
+        return res.redirect("/home");
+      }
+      if (req.body.password !== req.body.confirmPassword) {
+        req.flash("error", "Password and Confirm Password Doesn't match");
+        return res.redirect("/home");
+      }
+      if (await bcrypt.compare(req.body.oldPassword, user.password)) {
+        const salt = await bcrypt.genSalt(10);
+        const hashpassword = await bcrypt.hash(req.body.password, salt);
+        await User.findOneAndUpdate(
+          { email: req.body.email },
+          { $set: { password: hashpassword } }
+        );
+        req.flash("success", "Password Changed Successfully! Please Login!");
+        return res.redirect("/login");
+      } else {
+        req.flash("error", "Password Doesn't match");
+        return res.redirect("/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   static logoutUser = (req, res) => {
     req.logout(function (err) {
       if (err) {

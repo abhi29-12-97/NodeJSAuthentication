@@ -1,0 +1,36 @@
+<h1>Reset Password</h1>
+<form action="/reset/<%=user._id%>" method="POST">
+  <label for="email">Email</label>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="abc@xyz.com"
+    required
+  />
+  <label for="old-password">old Password</label>
+  <input
+    type="text"
+    name="oldPassword"
+    id="password"
+    placeholder="enter old password"
+    required
+  />
+  <label for="password">Password</label>
+  <input
+    type="text"
+    name="password"
+    id="password"
+    placeholder="enter password"
+    required
+  />
+  <label for="confirmPassword">Confirm Password</label>
+  <input
+    type="text"
+    name="confirmPassword"
+    id="confirm-password"
+    placeholder="confirm password"
+    required
+  />
+  <button type="submit">reset</button>
+</form>
