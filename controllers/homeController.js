@@ -4,17 +4,19 @@ import passport from "passport";
 export default class Home {
   static home = (req, res) => {
     res.render("home", {
-      title: "Home",
-      name: req.user.email,
+      title: "home",
+    });
+  };
+  static dashBoard = (req, res) => {
+    res.render("dashboard", {
+      title: "dashboard",
+      name: req.user.name,
     });
   };
 
   static signUpPage = (req, res) => {
     if (req.isAuthenticated()) {
-      return res.redirect("/home", {
-        title: "Home",
-        name: req.user.name,
-      });
+      return res.redirect("/home");
     }
     res.render("signup", {
       title: "signup",
@@ -23,10 +25,7 @@ export default class Home {
 
   static signInPage = (req, res) => {
     if (req.isAuthenticated()) {
-      return res.redirect("/home", {
-        title: "Home",
-        name: req.user.name,
-      });
+      return res.redirect("/home");
     }
     res.render("signin", {
       title: "signin",
@@ -44,6 +43,7 @@ export default class Home {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
         const newUser = await User.create({
+          name: req.body.name,
           email: req.body.email,
           password: hashpassword,
         });
