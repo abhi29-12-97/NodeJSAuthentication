@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import passportLocal from "./config/passport-local-strategy.js";
 import passportGoogle from "./config/paasport-googleAuth.js";
+import { config } from "dotenv";
 //initializing express app
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,7 +34,7 @@ app.use(express.json());
 app.use(
   session({
     name: "Authentication",
-    secret: "keyboard cat",
+    secret: process.env.SECRET_KEY || "SECRET_KEY",
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 6000 },

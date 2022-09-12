@@ -1,39 +1,59 @@
-<h1>signup</h1>
+<h1>Signup</h1>
 
 <form action="/signup" method="post" id="form">
-  <label for="name">Name</label>
-  <input type="text" name="name" placeholder="abc" />
-  <label for="email">Email</label>
-  <input
-    type="email"
-    name="email"
-    id="email"
-    placeholder="abc@xyz.com"
-    required
-  />
-  <label for="password">Password</label>
-  <input
-    type="text"
-    name="password"
-    id="password"
-    placeholder="enter password"
-    required
-  />
-  <label for="confirmPassword">Confirm Password</label>
-  <input
-    type="text"
-    name="confirmPassword"
-    id="confirm-password"
-    placeholder="confirm password"
-    required
-  />
+  <div class="input">
+    <label for="name" class="label">Name</label>
+    <input type="text" name="name" placeholder="abc" />
+  </div>
+  <div class="input">
+    <label for="email" class="label">Email</label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="abc@xyz.com"
+      required
+    />
+  </div>
+  <div class="input">
+    <label for="password" class="label">Password</label>
+    <input
+      type="text"
+      name="password"
+      id="password"
+      placeholder="enter password"
+      required
+    />
+  </div>
+
+  <div class="input">
+    <label for="confirmPassword" class="label">Confirm Password</label>
+    <input
+      type="text"
+      name="confirmPassword"
+      id="confirm-password"
+      placeholder="confirm password"
+      required
+    />
+  </div>
   <button
-    class="g-recaptcha"
+    class="g-recaptcha button"
     data-sitekey="6LfJzeohAAAAAA1cdgz8D4WC1BNMdng1LVoLm52e"
     data-callback="onSubmit"
   >
     SIGN UP
   </button>
 </form>
-<p><a href="/auth/google">Google Sign in/Signup</a></p>
-<p>Already have an account <a href="/login">Sign In</a></p>
+<p>
+  <a href="/auth/google"
+    ><img
+      class="google-img"
+      src="https://cdn-icons-png.flaticon.com/512/4019/4019753.png"
+    />
+    Google
+  </a>
+</p>
+<p>
+  Already have an account
+  <a href="/login"><button class="button">Sign In</button></a>
+</p>

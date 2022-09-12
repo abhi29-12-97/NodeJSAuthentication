@@ -27,8 +27,10 @@ passport.use(
   new googleStrategy(
     {
       clientID:
+        process.env.CLIENT_ID ||
         "105273824142-cih5bdc36tcb6jtp8qrjk8jk88siest0.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientSecret:
+        process.env.CLIENT_SECRET || "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",
       callbackURL: "http://localhost:3000/auth/google/callback",
     },
     authenticator

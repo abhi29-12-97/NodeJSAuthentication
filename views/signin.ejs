@@ -6,30 +6,47 @@
 </script>
 <h1>Signin</h1>
 <form action="/login" method="post" id="form">
-  <label for="email">Email</label>
-  <input
-    type="email"
-    name="email"
-    id="email"
-    placeholder="abc@xyz.com"
-    required
-  />
-  <label for="password">Password</label>
-  <input
-    type="text"
-    name="password"
-    id="password"
-    placeholder="enter password"
-    required
-  />
+  <div class="input">
+    <label class="label" for="email">Email</label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="abc@xyz.com"
+      required
+    />
+  </div>
+
+  <div class="input">
+    <label class="label" for="password">Password</label>
+    <input
+      type="text"
+      name="password"
+      id="password"
+      placeholder="enter password"
+      required
+    />
+  </div>
+
   <button
-    class="g-recaptcha"
+    class="g-recaptcha button"
     data-sitekey="6LfJzeohAAAAAA1cdgz8D4WC1BNMdng1LVoLm52e"
     data-callback="onSubmit"
   >
     SIGN In
   </button>
 </form>
-<p><a href="/auth/google">Google Sign in/Signup</a></p>
+<p>
+  <a href="/auth/google"
+    ><img
+      class="google-img"
+      src="https://cdn-icons-png.flaticon.com/512/4019/4019753.png"
+    />
+    Google
+  </a>
+</p>
 
-<p>Don't have account <a href="/signup">Sign Up</a></p>
+<p>
+  Don't have account
+  <a href="/signup"><button class="button">Sign Up</button></a>
+</p>

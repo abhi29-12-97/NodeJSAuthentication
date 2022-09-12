@@ -1,4 +1,10 @@
-<h1>home</h1>
-<%= user.name%>
-<a href="/logout">logout</a>
-<a href="/reset/<%= user._id%>">Reset password</a>
+<h1>Dash Board</h1>
+<div><%= user.name%></div>
+<div>
+  <a href="/logout"><button class="button">Log Out</button> </a>
+</div>
+<p>
+  <a href="/reset/<%= user._id%>"
+    ><button class="button">Reset password</button></a
+  >
+</p>
