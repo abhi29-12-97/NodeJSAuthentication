@@ -1,6 +1,7 @@
 import express from "express";
 import Home from "../controllers/homeController.js";
 import Auth from "../config/auth.js";
+import passport from "passport";
 const router = express.Router();
 
 //entry point to our site in which user will see the login signup button
@@ -22,4 +23,20 @@ router.get("/reset/:id", Auth.checkAuthenticated, Home.resetPage);
 router.post("/reset/:id", Home.update);
 //logging out the user
 router.get("/logout", Home.logoutUser);
+
+//google routes
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/home",
+    failureRedirect: "/login",
+  })
+);
 export default router;

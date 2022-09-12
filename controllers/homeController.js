@@ -2,11 +2,14 @@ import User from "../models/Users.js";
 import bcrypt from "bcrypt";
 import passport from "passport";
 export default class Home {
+  // renders the home page entry point to our site
   static home = (req, res) => {
     res.render("home", {
       title: "home",
     });
   };
+
+  //when the user is signed in dashboard will be rendered
   static dashBoard = (req, res) => {
     res.render("dashboard", {
       title: "dashboard",
@@ -14,6 +17,7 @@ export default class Home {
     });
   };
 
+  //if the user is not signed in signup page will be rendered if he is sign in automatically render to dashboard
   static signUpPage = (req, res) => {
     if (req.isAuthenticated()) {
       return res.redirect("/home");
@@ -22,7 +26,7 @@ export default class Home {
       title: "signup",
     });
   };
-
+  //if the user is not signed in sign page will be rendered if he is sign in automatically render to dashboard
   static signInPage = (req, res) => {
     if (req.isAuthenticated()) {
       return res.redirect("/home");
@@ -31,7 +35,7 @@ export default class Home {
       title: "signin",
     });
   };
-
+  //when the user clicks signup post request handler to create the user in database
   static createUser = async (req, res) => {
     try {
       if (req.body.password !== req.body.confirmPassword) {
@@ -57,7 +61,7 @@ export default class Home {
       console.log("error", error);
     }
   };
-
+  //post request for sign in authenticate the fields using local passport strategy if success go to dashboard or say login again
   static loginUser = (req, res, next) => {
     passport.authenticate("local", {
       successRedirect: "/home",
@@ -66,6 +70,8 @@ export default class Home {
       successFlash: true,
     })(req, res, next);
   };
+
+  //reset password get request to render the reset page from dashboard
   static resetPage = async (req, res) => {
     const user = await User.findById(req.params.id);
     res.render("reset", {
@@ -73,6 +79,8 @@ export default class Home {
       user: user,
     });
   };
+
+  //reset post request to update the password and storing in db
   static update = async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
@@ -101,11 +109,14 @@ export default class Home {
       console.log(error);
     }
   };
+
+  //logging  out the user
   static logoutUser = (req, res) => {
     req.logout(function (err) {
       if (err) {
         console.log(err);
       }
+
       req.flash("success", "You have successfully logged out!");
       res.redirect("/login");
     });

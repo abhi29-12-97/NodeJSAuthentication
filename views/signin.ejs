@@ -1,6 +1,7 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
   function onSubmit(token) {
-    document.getElementById("form").submit();
+    document.getElementById("demo-form").submit();
   }
 </script>
 <h1>Signin</h1>
@@ -29,3 +30,6 @@
     SIGN In
   </button>
 </form>
+<p><a href="/auth/google">Google Sign in/Signup</a></p>
+
+<p>Don't have account <a href="/signup">Sign Up</a></p>

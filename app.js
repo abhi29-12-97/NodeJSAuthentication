@@ -7,7 +7,7 @@ import db from "./config/mongoose.js";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import passportLocal from "./config/passport-local-strategy.js";
-
+import passportGoogle from "./config/paasport-googleAuth.js";
 //initializing express app
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,15 +27,16 @@ app.set("layout extractScripts", true);
 //bodyparser to parse the form data from the req.body
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 
 //express session to set up passport local strategy
 app.use(
   session({
+    name: "Authentication",
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 6000 },
   })
 );
 
@@ -53,7 +54,7 @@ app.use((req, res, next) => {
 //initializing passport and session to get inbuilt passport functionality like logout,isAuthenticated
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(passport.setAuthenticatedUser);
 // setting up routes and using the index.js file from the routes folder
 app.use("/", router);
 
